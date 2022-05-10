@@ -94,10 +94,10 @@ import dj_database_url
 if DEBUG == False:
 
     DATABASES = {
-        'default': dj_database_url.config(default=config('DATABASE_URL')),
+        'default': dj_database_url.config(default=config('DATABASE_URL'))
     }    
 
-   """ DATABASES = {
+    """ DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
