@@ -1,0 +1,54 @@
+{% extends 'includes/include.html'%}
+{%load static%}
+{%block content%}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+    {% include 'includes/alerts.html' %}
+    
+    <div class="container">
+        <div class="row">
+        <aside class="col-md-2">
+        </aside>
+        <main class="col-md-8">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Tus favoritos</strong>
+            </header>
+            <div class="card-body">            
+                    <div class="col-md-middle">
+                        <h6 class="text-muted">Bienvenido {{user.first_name}}</h6>
+                       <a href="{% url 'enviarcotiz' %}" class="btn btn-primary btn-block abs-center"> Pedir Cotizacion </a>
+                       <a href="{% url 'forgotpassword'%}" class="btn btn-primary btn-block"> Cambiar Contrase;a </a>
+                </div> <!-- row.// -->
+            </div> <!-- card-body .// -->
+            <div class="table-responsive">
+            <table class="table table-hover">
+                {% if user.id is not None %}
+                    {% for favorito in favoritos%}
+                <tr>
+                    <td width="65">
+                        <img src="{{favorito.product.imagenes.url}}" class="img-xs border">
+                    </td>
+                    <td> 
+                        <p class="title mb-0">{{favorito.product.nombre_producto}} </p>
+                        <var class="price text-muted">PN : {{favorito.product.numero_parte}}</var>
+                    </td>
+                    <td> MARCA <br> {{favorito.product.marca}} </td>
+                    <td width="250"> <a href="{% url 'quitandoFavorito' favorito.product.id%}" class="btn btn-outline-danger">Eliminar</a> <a href="{{ favorito.product.redireccionar }}" class="btn btn-light"> Detalles </a> </td>
+                </tr>
+                    {%endfor%}
+                {%endif%}
+            </table>
+            </div> <!-- table-responsive .end// -->
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+{%endblock%}

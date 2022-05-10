@@ -1,0 +1,15 @@
+<div class="star-rating">
+{% if user.id is None%}
+    
+{%else%}
+    {% if favoritos_existe == True %}
+        {% if producto.id in lista_favoritos %} 
+                <a href="{% url 'quitandoFavorito' producto.id%}"><i class="fav fas fa-star" aria-hidden="true" style="color: #ffa400;"></i></a>   
+        {%else%}                 
+                <a href="{% url 'favorito' producto.id%}"><i class="fav fas fa-star" aria-hidden="true"></i></a>
+        {%endif%}
+    {%else%}
+        <a href="{% url 'favorito' producto.id%}"><i class="fav fas fa-star" aria-hidden="true"></i></a> 
+    {%endif%} 
+{%endif%}  
+</div>  

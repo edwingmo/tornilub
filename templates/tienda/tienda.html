@@ -1,0 +1,185 @@
+{% extends 'includes/include.html' %}
+{%load static%}
+{% block content %} 
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">Nuestra Tienda</h2>
+        
+    </div> <!-- container //  -->
+    </section>
+    <!-- ========================= SECTION INTRO END// ========================= -->
+
+    <!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+    
+    <div class="row">
+        <aside class="col-md-3">
+            
+    <div class="card">
+        <article class="filter-group">
+            <header class="card-header">
+                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Categorias</h6>
+                </a>
+            </header>
+            <div class="filter-content collapse show" id="collapse_1" style="">
+                <div class="card-body">
+                    
+                    <!--For para las categorias-->
+                    <ul class="list-menu">
+                        <li><a href="{%url 'tienda' %}">Todos</a></li>
+                        {% for categorias in todas_categorias %}
+                            <li><a href="{{ categorias.redireccionar }}">{{categorias.categoria_nombre}}</a></li>
+                        {%endfor%}
+                    </ul>
+                    <!--Fin del for-->
+    
+                </div> <!-- card-body.// -->
+            </div>
+        </article> <!-- filter-group  .// -->
+
+        <!--<article class="filter-group">
+            <header class="card-header">
+                <a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Tamanos </h6>
+                </a>
+            </header>
+            <div class="filter-content collapse show" id="collapse_4" style="">
+                <div class="card-body">
+                  <label class="checkbox-btn">
+                    <input type="checkbox">
+                    <span class="btn btn-light"> XS </span>
+                  </label>
+    
+                  <label class="checkbox-btn">
+                    <input type="checkbox">
+                    <span class="btn btn-light"> SM </span>
+                  </label>
+    
+                  <label class="checkbox-btn">
+                    <input type="checkbox">
+                    <span class="btn btn-light"> LG </span>
+                  </label>
+    
+                  <label class="checkbox-btn">
+                    <input type="checkbox">
+                    <span class="btn btn-light"> XXL </span>
+                  </label>
+            </div> #card-body#
+            </div>
+        </article> #filter-group#-->
+        
+
+        <!--Empieza mi filtro para buscar por precio
+            <article class="filter-group">
+            <header class="card-header">
+                <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+                    <i class="icon-control fa fa-chevron-down"></i>
+                    <h6 class="title">Precios </h6>
+                </a>
+            </header>
+          
+            <div class="filter-content collapse show" id="collapse_3" style="">
+                <div class="card-body">                    
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>Min</label>
+                      <form action="" method="GET">
+                       <input name ="precio_min" class="form-control" placeholder="0$" type="number">                 
+                          <!--<select class="mr-2 form-control">
+                            <option value="0">$0</option>
+                            <option value="50">$50</option>
+                            <option value="100">$100</option>
+                            <option value="150">$150</option>
+                            <option value="200">$200</option>
+                            <option value="500">$500</option>
+                            <option value="1000">$1000</option>
+                        </select>
+                    </div>
+                    </div>  form-row.//# 
+                    <button class="btn btn-block btn-primary">Buscar</button>
+                    </form>
+                </div> card-body.//# 
+            </div> Termina filtro para precio -->
+
+        </article> <!-- filter-group .//# -->
+        
+    </div> <!-- card.// -->
+    
+        </aside> <!-- col.// -->
+        <main class="col-md-9">
+    
+    <header class="border-bottom mb-4 pb-3">
+            <div class="form-inline">
+                <span class="mr-md-auto">{{cantidad_productos}} Items Encontrados</span>              
+            </div>
+    </header><!-- sect-heading -->
+    
+    {% if cantidad_productos > 0 %}
+    <div class="row"> 
+        {%for producto in productos%}      
+        <div class="col-md-4">
+            <figure class="card card-product-grid">  
+                {% include 'includes/favoritos.html'%} 
+                <div class="img-wrap">                              
+                    <a href="{{ producto.redireccionar }}"><img src="{{ producto.imagenes.url}}"></a>  
+                </div> <!-- img-wrap.// -->              
+                <figcaption class="info-wrap">
+                    <div class="fix-height">                      
+                        <a href="{{ producto.redireccionar }}" class="title">{{producto.nombre_producto}}</a>
+                        <!--<div class="price-wrap mt-2">
+                            <span class="price">{{producto.precio}}</span>
+                        </div>  price-wrap.// -->
+                    </div>                            
+                    <a href="{% url 'solicitarcot' producto.id %}" class="btn btn-block btn-success"> Preguntar Disponibilidad</a>                                                                                               
+                </figcaption>                            
+            </figure>
+        </div> <!-- col.// -->
+        {%endfor%}   
+    </div><!-- row end.// -->  
+    {%else%}
+    <h3>Si no lo encuentras envianos un correo solicitando el producto en <a href="{% url 'solicitarcot' %}">Solicitar Cotizacion</a>, haremos lo posible para encontrarlo</h3>
+    {%endif%}
+    
+   
+    
+    {% if productos.has_other_pages %}
+    <nav class="mt-4" aria-label="Page navigation sample">
+      <ul class="pagination">
+
+        {% if productos.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ productos.previous_page_number }}">Anterior</a></li>
+        {%else%}
+        <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+        {%endif%}
+
+        {% for i in productos.paginator.page_range %}
+            {% if productos.number == i %}
+                <li class="page-item active"><p class="page-link">{{i}}</p></li>
+            {%else %}
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {%endif%}
+        {%endfor%}
+        
+        {% if productos.has_next%}
+            <li class="page-item"><a class="page-link" href="?page={{productos.next_page_number}}">Siguiente</a></li>
+        {% else %}
+            <li class="page-item disabled"><a class="page-link" href="#">Siguiente</a></li>
+        {%endif%}
+      </ul>
+      {%endif%}
+    </nav>
+    
+        </main> <!-- col.// -->
+    
+    </div>
+    
+    </div> <!-- container .//  -->
+    </section>
+    
+    <!-- ========================= SECTION CONTENT END// ========================= --></body>
+    {%endblock%}

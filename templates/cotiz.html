@@ -1,0 +1,53 @@
+{% extends 'includes/include.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y" style="min-height:84vh">}
+    <!-- ============================ COMPONENT LOGIN   ================================= -->
+        <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+            {% include 'includes/alerts.html' %}
+          <div class="card-body">
+        {% if user.id is not None%}
+          <h4 class="card-title mb-4">Pedir Cotizacion</h4>
+          <form action="{%url 'enviarcotiz' %}" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="email">Email donde recibiras la Cotizacion :</label>         
+                <input type="email" class="form-control" maxlength="60" value="{{user.email}}" id="email" name="email" required>
+                </div> <!-- form-group// -->
+
+              <label for="asunto">Asunto:</label>
+
+              {% if producto_email.id != None %}
+                <div class="form-group">                  
+                    <input type="text" class="form-control" maxlength="60" value="Necesito informacion sobre : {{producto_email.nombre_producto}}, {{producto_email.numero_parte}}" name="asunto">
+                </div> <!-- form-group// -->
+              {% else %}
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="asunto" name="asunto">
+                </div> <!-- form-group// -->
+              {%endif%}
+
+              <div class="form-group">
+                <textarea type="text-area" rows="10" maxlength="200" class="form-control" default="que deseas preguntar?" name="pregunta" style="max-height:100px;"></textarea>
+              </div> <!-- form-group// -->   
+
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block"> Enviar  </button>
+              </div> <!-- form-group// -->    
+          </form>
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+        {%else%}
+        <h4 class="card-title mb-4">Pedir Cotizacion</h4><br>
+        <a href="{% url 'registrarse' %}" class="btn btn-primary btn-block"> Registrate Para Obtener Una Cotizacion</a>
+        {%endif%}
+         <br><br>
+    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+{% endblock %}
