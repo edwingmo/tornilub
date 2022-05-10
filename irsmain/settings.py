@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -105,6 +105,13 @@ if DEBUG == False:
     }"""
 else:
     DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+    """DATABASES = {
         'default':{
             'ENGINE': 'django.db.backends.mysql',
             'NAME': config('NAME'),
@@ -113,7 +120,7 @@ else:
             'HOST': config('HOST'),
             'PORT': config('PORT')
         }
-    }
+    }"""
 
 # Update database configuration with $DATABASE_URL.
 
@@ -167,7 +174,7 @@ else:
     STATIC_URL = 'static/'
     os.makedirs(STATIC_TMP, exist_ok=True)
     os.makedirs(STATIC_ROOT, exist_ok=True)
-    STATICFILES_DIRS = (
+    STATICFILE_DIRS = (
         os.path.join(BASE_DIR, 'irsmain/static')
     )
 
