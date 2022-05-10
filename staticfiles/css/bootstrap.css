@@ -35,6 +35,9 @@
   --color-inactivo: #5f5050;
   --color-hover: #ffa400;
 }
+.whatsapp.a{
+  color: #00e81d;
+}
 
 *,
 *::before,
