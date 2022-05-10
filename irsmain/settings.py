@@ -89,14 +89,20 @@ AUTH_USER_MODEL = 'accounts.User' #applicacion account, clase User
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+import dj_database_url
 
 if DEBUG == False:
+
     DATABASES = {
+        'default': dj_database_url.config(default=config('DATABASE_URL')),
+    }    
+
+   """ DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
-    }
+    }"""
 else:
     DATABASES = {
         'default':{
