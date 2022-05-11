@@ -94,7 +94,9 @@ import dj_database_url
 if DEBUG == False:
 
     DATABASES = {
-        'default': dj_database_url.config(default=config('DATABASE_URL'))
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+            )
     }    
 
     """ DATABASES = {
