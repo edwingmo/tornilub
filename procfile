@@ -1,1 +1,1 @@
-web: gunicorn irsmain.wsgi
+web: gunicorn irsmain.wsgi --log-file -
