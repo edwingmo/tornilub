@@ -1,5 +1,3 @@
-from email import message
-from unicodedata import name
 from django.shortcuts import render, redirect
 from .formulario_registro import formularioRegistro
 from .models import User
@@ -7,7 +5,6 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from tienda.views import _crear_favoritos
 from tienda.models import Favoritos, itemFavoritos
-from django.conf import settings
 
 # Importes para enviar el correo
 from django.contrib.sites.shortcuts import get_current_site

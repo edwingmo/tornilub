@@ -1,12 +1,9 @@
-from inspect import currentframe
-from pyexpat.errors import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from carrito.models import cartItem
 from carrito.views import _cart_id
 from .models import Productos, Favoritos, itemFavoritos
 from categoria.models import Categoria
-from django.urls import reverse
 from django.db.models import Q
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator #Todo esto sirve para las paginaciones
 
