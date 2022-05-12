@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from carrito.models import cartItem
 from carrito.views import _cart_id
-from .models import Productos, Favoritos, itemFavoritos
+from .models import Productos, Favoritos, itemfavoritos
 from categoria.models import Categoria
 from django.urls import reverse
 from django.db.models import Q
@@ -124,9 +124,9 @@ def agregandoFavorito(request, id_producto):
         favoritos.save()
     
     try:
-        producto_favorito = itemFavoritos.objects.get(product=producto, favorit=favoritos)
-    except itemFavoritos.DoesNotExist:
-        producto_favorito = itemFavoritos.objects.create(product=producto, favorit=favoritos, user=request.user)
+        producto_favorito = itemfavoritos.objects.get(product=producto, favorit=favoritos)
+    except itemfavoritos.DoesNotExist:
+        producto_favorito = itemfavoritos.objects.create(product=producto, favorit=favoritos, user=request.user)
         producto_favorito.save()
     
     return redirect(url)
@@ -141,7 +141,7 @@ def quitandoFavorito(request, id_producto):
         pass
     
     try:
-        itemFavoritos.objects.get(product=producto, user=request.user).delete()
+        itemfavoritos.objects.get(product=producto, user=request.user).delete()
     except:
         pass
 
@@ -153,7 +153,7 @@ def _favoritos_Existe(request):
     
     try:
         favoritos = Favoritos.objects.get(id_favorito=_crear_favoritos(request))
-        items_favoritos = itemFavoritos.objects.filter(favorit=favoritos).exists()
+        items_favoritos = itemfavoritos.objects.filter(favorit=favoritos).exists()
         if items_favoritos == False:
             favoritos.delete()
         else:

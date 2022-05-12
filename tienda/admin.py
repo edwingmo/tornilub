@@ -24,4 +24,4 @@ class AdminProductos(admin.ModelAdmin):
 
 admin.site.register(Productos, AdminProductos)
 admin.site.register(Favoritos)
-admin.site.register(itemFavoritos)
+admin.site.register(itemfavoritos)
