@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://tornilub.herokuapp.com/']
+ALLOWED_HOSTS = ['tornilub.herokuapp.com']
 
 
 # Application definition
