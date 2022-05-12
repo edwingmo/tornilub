@@ -1,7 +1,7 @@
 from django import forms
 from .models import User
-from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Checkbox
+#from captcha.fields import ReCaptchaField
+#from captcha.widgets import ReCaptchaV2Checkbox
 
 import accounts
 
@@ -16,7 +16,7 @@ class formularioRegistro(forms.Form):
     email = forms.EmailField(max_length=40,  widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'ej@gmail.com' ,'id':'email'}))
     password = forms.CharField(max_length=20,  widget=forms.PasswordInput(attrs={'class': 'form-control', 'id':'password'}))
     confirm_password = forms.CharField(max_length=20,  widget=forms.PasswordInput(attrs={'class': 'form-control', 'id':'confirm_password'}))
-    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    #captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
 
     def clean(self):
@@ -27,7 +27,7 @@ class formularioRegistro(forms.Form):
         username = cleaned_data.get('username')
         name = cleaned_data.get('name')
         apellido = cleaned_data.get('apellido')
-        captcha = cleaned_data.get('captcha')
+        #captcha = cleaned_data.get('captcha')
 
         if not name.isalpha():
             raise forms.ValidationError('El nombre contiene numeros o caracteres especiales')
