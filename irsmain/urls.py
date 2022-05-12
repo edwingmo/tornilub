@@ -30,7 +30,12 @@ urlpatterns = [
     path('carrito/', include('carrito.urls')),
     path('cotizacion/', include('cotizacion.urls')),
     path('account/', include('accounts.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
+from decouple import config
 
-"""urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) asd"""
+if config('DEBUG'):
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

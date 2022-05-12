@@ -6,7 +6,7 @@ from .models import User
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from tienda.views import _crear_favoritos
-from tienda.models import Favoritos, itemfavoritos
+from tienda.models import Favoritos, itemFavoritos
 from django.conf import settings
 
 # Importes para enviar el correo
@@ -75,9 +75,9 @@ def login(request):
 
             try:
                 favoritos = Favoritos.objects.get(id_favorito=_crear_favoritos(request))
-                existen_favoritos = itemfavoritos.objects.filter(favorit=favoritos).exists()
+                existen_favoritos = itemFavoritos.objects.filter(favorit=favoritos).exists()
                 if existen_favoritos:
-                    favoritos_items = itemfavoritos.objects.filter(favorit=favoritos) #esto devuelve una lista
+                    favoritos_items = itemFavoritos.objects.filter(favorit=favoritos) #esto devuelve una lista
                     for item in favoritos_items:
                         item.user = user
                         item.save()

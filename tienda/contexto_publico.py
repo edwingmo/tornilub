@@ -1,4 +1,4 @@
-from .models import Productos, Favoritos, itemfavoritos
+from .models import Productos, Favoritos, itemFavoritos
 from .views import _crear_favoritos
 
 def contextoPublico(request):
@@ -8,13 +8,13 @@ def contextoPublico(request):
 
     
     favoritos = Favoritos.objects.filter(id_favorito=_crear_favoritos(request))
-    favoritos_items = itemfavoritos.objects.filter(favorit=favoritos[:1])
+    favoritos_items = itemFavoritos.objects.filter(favorit=favoritos[:1])
 
     if request.user.is_authenticated:
-        favoritos_items = itemfavoritos.objects.filter(users=request.user)      
+        favoritos_items = itemFavoritos.objects.filter(user=request.user)      
         
     else:
-        favoritos_items = itemfavoritos.objects.filter(favorit=favoritos[:1])
+        favoritos_items = itemFavoritos.objects.filter(favorit=favoritos[:1])
 
     favoritos_cantidad = False
     favoritos_list = []

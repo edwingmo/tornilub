@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ['https://tornilub.herokuapp.com/']
+ALLOWED_HOSTS = [config('ALLOWHOST')]
 
 
 # Application definition
@@ -161,24 +161,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-if DEBUG == True:
-    STATIC_URL = 'static/'
-    STATIC_ROOT = BASE_DIR /'staticfiles'
-    STATICFILES_DIRS = [
-            'irsmain/static'
-        ]
 
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR /'images'
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_TMP = os.path.join(BASE_DIR, 'static')
-    STATIC_URL = 'static/'
-    os.makedirs(STATIC_TMP, exist_ok=True)
-    os.makedirs(STATIC_ROOT, exist_ok=True)
-    STATICFILE_DIRS = (
-        os.path.join(BASE_DIR, 'irsmain/static')
-    )
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR /'staticfiles'
+STATICFILES_DIRS = [
+        'irsmain/static'
+    ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'images'
+
 
 from django.contrib.messages import constants as messages
 

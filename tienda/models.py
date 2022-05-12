@@ -36,8 +36,8 @@ class Favoritos(models.Model):
     def __str__(self):
         return self.id_favorito
 
-class itemfavoritos(models.Model):
-    users = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+class itemFavoritos(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Productos, on_delete=models.CASCADE)
     favorit = models.ForeignKey(Favoritos, on_delete=models.CASCADE, null=True)
 
