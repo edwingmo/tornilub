@@ -47,8 +47,8 @@ class formularioRegistro(forms.Form):
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('El nombre de usuario ya existe.')
 
-        if captcha == None:
-            raise forms.ValidationError('Por favor completa el recapcha')
+        """if captcha == None:
+            raise forms.ValidationError('Por favor completa el recapcha')"""
 
 
         
