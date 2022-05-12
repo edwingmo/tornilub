@@ -11,7 +11,7 @@ def contextoPublico(request):
     favoritos_items = itemfavoritos.objects.filter(favorit=favoritos[:1])
 
     if request.user.is_authenticated:
-        favoritos_items = itemfavoritos.objects.filter(user=request.user)      
+        favoritos_items = itemfavoritos.objects.filter(users=request.user)      
         
     else:
         favoritos_items = itemfavoritos.objects.filter(favorit=favoritos[:1])
