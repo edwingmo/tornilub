@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+from ctypes import cast
 import os
 from pathlib import Path
 from decouple import config
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config("DEBUG", cast=bool)
 
 ALLOWED_HOSTS = [f"{config('ALLOWHOST')}"]
 
@@ -153,14 +154,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR /'staticfiles'
-STATICFILES_DIRS = [
-        'irsmain/static'
-    ]
+if DEBUG:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = BASE_DIR /'static'
+    STATICFILES_DIRS = [
+            'irsmain/static'
+        ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'images'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR /'images'
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
 
 
 from django.contrib.messages import constants as messages
