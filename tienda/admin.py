@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Productos, Favoritos, itemFavoritos
+from .models import Productos, Favoritos, itemfavoritos
 # Register your models here.
 
 class AdminProductos(admin.ModelAdmin):
