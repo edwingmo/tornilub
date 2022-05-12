@@ -1,6 +1,5 @@
 from inspect import currentframe
 from pyexpat.errors import messages
-from subprocess import IDLE_PRIORITY_CLASS
 from django.shortcuts import get_object_or_404, redirect, render
 
 from carrito.models import cartItem
