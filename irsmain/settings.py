@@ -55,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'irsmain.urls'
@@ -87,25 +86,15 @@ AUTH_USER_MODEL = 'accounts.User' #applicacion account, clase User
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-import dj_database_url
 
-if DEBUG == False:
-
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=config('DATABASE_URL')
-            )
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
+}
 
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
-    """DATABASES = {
+"""DATABASES = {
         'default':{
             'ENGINE': 'django.db.backends.mysql',
             'NAME': config('NAME'),
@@ -154,26 +143,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-if DEBUG:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = BASE_DIR /'static'
-    STATICFILES_DIRS = [
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR /'static'
+STATICFILES_DIRS = [
             'irsmain/static'
         ]
 
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR /'images'
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_TMP = os.path.join(BASE_DIR, 'static')
-    STATIC_URL = '/static/'
-
-    os.makedirs(STATIC_TMP, exist_ok=True)
-    os.makedirs(STATIC_ROOT, exist_ok=True)
-
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'images'
 
 from django.contrib.messages import constants as messages
 
@@ -195,5 +173,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
