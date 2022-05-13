@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-from ctypes import cast
-import os
 from pathlib import Path
 from decouple import config
 
@@ -27,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = ["http://irsv.eba-nmdxp8gb.us-west-2.elasticbeanstalk.com/"]
+ALLOWED_HOSTS = ["irsv.eba-nmdxp8gb.us-west-2.elasticbeanstalk.com"]
 
 
 # Application definition
