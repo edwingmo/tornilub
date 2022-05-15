@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cotizacion',
     'captcha',
     'storages',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
