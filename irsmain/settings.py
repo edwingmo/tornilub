@@ -14,7 +14,7 @@ from pathlib import Path
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ["compresoresv.eba-hfxpxnuu.us-west-2.elasticbeanstalk.com"]
+ALLOWED_HOSTS = ["compresoresv.eba-hfxpxnuu.us-west-2.elasticbeanstalk.com","*"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'carrito',
     'cotizacion',
     'captcha',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -146,13 +147,34 @@ USE_TZ = True
 
 
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR /'static'
+"""STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
+#STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
             'irsmain/static'
-        ]
+        ]"""
 
-MEDIA_URL = '/media/'
+AWS_ACCESS_KEY_ID = 'AKIAQAYKUBKKK3IQR6NU'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'tornilubucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = 'public-read'
+AWS_LOCATION = 'static'
+
+STATICFILES_DIRS = [
+    'irsmain/static',
+]
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'irsmain.media_storage.MediaStorage'
+MEDIA_URL = '/images/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, "..", "www", "images")
 MEDIA_ROOT = BASE_DIR /'images'
 
 from django.contrib.messages import constants as messages
