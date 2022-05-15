@@ -1,5 +1,6 @@
 from .models import Productos, Favoritos, itemFavoritos
 from .views import _crear_favoritos
+from decouple import config
 
 def contextoPublico(request):
     cantidad_producto = Productos.objects.all().count
@@ -27,6 +28,7 @@ def contextoPublico(request):
     for favorito in favoritos_items:
         favoritos_list.append(favorito.product.id)
     
+    
     context = {
         'cantidad_productos':cantidad_producto,
         'clicks':clicks,
@@ -34,6 +36,7 @@ def contextoPublico(request):
         'favoritos':favoritos_items,
         'favoritos_existe':favoritos_cantidad,
         'lista_favoritos':favoritos_list,
+        'urladmin':config("ADMIN"),
     }
     
     return context
