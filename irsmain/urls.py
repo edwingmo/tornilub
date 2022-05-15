@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 #Fin de importe para imagenes
 
 urlpatterns = [
-    path(config("ADMIN")+"/", admin.site.urls, name="admin"),
+    path(config("ADMIN")+"/", admin.site.urls, name="admins"),
     path('', views.Home, name="home"), # Pagina principal por ahora
     path('categoria/', include('categoria.urls')),
     path('tienda/', include('tienda.urls')),
