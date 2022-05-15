@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from . import views
+from decouple import config
 
 #Importes para imagenes
 from django.conf import settings # Necesario para indicarle las rutas medias que se colocan en el setting
@@ -23,7 +24,7 @@ from django.conf.urls.static import static
 #Fin de importe para imagenes
 
 urlpatterns = [
-    path('xfs78vxsa63/', admin.site.urls),
+    path(config("ADMIN"), admin.site.urls),
     path('', views.Home, name="home"), # Pagina principal por ahora
     path('categoria/', include('categoria.urls')),
     path('tienda/', include('tienda.urls')),
