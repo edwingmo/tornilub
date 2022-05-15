@@ -16,7 +16,7 @@
             {% endcomment %}
         </ul>
         <ul class="navbar-nav">
-            <li><a href="{% url 'solicitarcot' %}" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
+            <li><a href="{% url 'solicitarcot' %}" class="nav-link"><i class="fa-solid fa-envelope"></i> Email </a></li>
             {% comment "" %}<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Llamanos</a></li>{% endcomment %}
             {%if user.id is not None %}
                 {% if user.is_admin %}
