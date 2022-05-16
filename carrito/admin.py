@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Carrito, cartItem
 
-class CarritoAdmin(admin.ModelAdmin):
+"""class CarritoAdmin(admin.ModelAdmin):
     list_display=('id_carrito',)
 
 class CarritoItemAdmin(admin.ModelAdmin):
@@ -11,3 +11,4 @@ class CarritoItemAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Carrito, CarritoAdmin)
 admin.site.register(cartItem, CarritoItemAdmin)
+"""
