@@ -165,7 +165,7 @@ if probando == True:
     }
     AWS_S3_FILE_OVERWRITE = False   
     AWS_DEFAULT_ACL = 'public-read'
-    AWS_LOCATION = 'statics'
+    AWS_LOCATION = 'static'
 
     STATICFILES_DIRS = [
         'irsmain/static',
