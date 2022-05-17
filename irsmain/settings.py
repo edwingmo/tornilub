@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'cotizacion',
     'captcha',
     'storages',
-    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
@@ -166,7 +165,7 @@ if probando == True:
     }
     AWS_S3_FILE_OVERWRITE = False   
     AWS_DEFAULT_ACL = 'public-read'
-    AWS_LOCATION = 'static'
+    AWS_LOCATION = 'statics'
 
     STATICFILES_DIRS = [
         'irsmain/static',
