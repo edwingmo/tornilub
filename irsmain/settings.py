@@ -153,7 +153,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
 STATICFILES_DIRS = [
             'irsmain/static'
         ]"""
-probando = False
+probando = config('TESTED')
 
 if probando == True:
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
