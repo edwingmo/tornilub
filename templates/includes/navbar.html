@@ -42,6 +42,7 @@
                 <img class="logo" src="{% static 'images/logocompresores.jpeg'%}">
             </a> <!-- brand-wrap.// -->
         </div>
+        {%comment%}
         <div class="col-lg col-sm col-md col-6 flex-grow-0">
             <div class="category-wrap dropdown d-inline-block float-right">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> 
@@ -56,8 +57,43 @@
         </div> <!-- col.// -->
         <a href="{% url 'tienda' %}" class="btn btn-outline-primary">Tienda</a>
         <div class="col-sm">
-        <a href="{% url 'home' %}#vision" class="btn btn-outline-primary">Mision y Vision</a>
+        <a href="{% url 'home' %}#vision" class="btn btn-outline-primary">Nosotros</a>
         </div>
+        {%endcomment%}
+
+        <!-- DROPDOWN MENU-->
+
+        <div class="col-lg-1 col-md-3 col-6">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Menu
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" tabindex="-1" href="{% url 'home' %}">Inicio</a></li>
+                <li><a class="dropdown-item" tabindex="-1" href="{% url 'tienda' %}">Tienda</a></li>
+                <li class="dropdown-submenu">
+                    <a class="dropdown-item test dropdown-toggle" tabindex="-1" href="#">Categoria <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {%for categorias in todas_categorias %}
+                            <li><a class="dropdown-item" tabindex="-1" href="{{categorias.redireccionar}}">{{categorias.categoria_nombre}}</a></li>
+                            {%endfor%}
+                            {% comment "" %}
+                                <li class="dropdown-submenu">
+                                <a class="dropdown-item test" href="#">Another dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">3rd level dropdown</a></li>
+                                    <li><a class="dropdown-item" href="#">3rd level dropdown</a></li>
+                                    </ul>
+                                </li>
+                                {% endcomment %}
+                            </ul>
+                            <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" tabindex="-1" href="{% url 'home' %}#vision">Nosotros</a></li>
+                </li>
+                </ul>
+            </div>
+        </div>
+        
+             <!-- DROPDOWN MENU END-->
         
         <div class="col-lg  col-md-6 col-sm-12 col">
             <form action="{% url 'buscar' %}" class="search" method="GET">    
