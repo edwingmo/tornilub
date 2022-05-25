@@ -26,11 +26,12 @@ def register(request):
             apellido = form.cleaned_data['apellido']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+            phone_number = form.cleaned_data['phone_number']
 
             """encsha256 = hashlib.sha256()
             encsha256.update(password.encode('utf8'))"""
 
-            user = User.objects.create_user(username=username, first_name=name, last_name=apellido, email=email, password=password)
+            user = User.objects.create_user(username=username, first_name=name, last_name=apellido, email=email, password=password, phone_number=phone_number)
             user.save()
 
             #Metodo para enviar el correo
@@ -51,8 +52,11 @@ def register(request):
             #mensaje de usuario registrado exitosamente
             messages.success(request, 'Se registro el Usuario exitosamente')
 
-            return redirect('/account/login/?command=verification&email='+email)
-            
+            #from irsmain.whatsapp import whatsapp_welcome as wsw
+
+            #wsw(phone_number)
+
+            return redirect('/account/login/?command=verification&email='+email)       
 
     context = {
         'form':form,

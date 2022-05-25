@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 #Creando clase para hacer un account normal
 class MyAccountManager(BaseUserManager):
     
-    def create_user(self, username, first_name, last_name, email, password=None):
+    def create_user(self, username, first_name, last_name, email, phone_number, password=None):
 
         #Verificando que tenga email y username
         if not email:
@@ -13,6 +13,8 @@ class MyAccountManager(BaseUserManager):
         if not username:
             raise ValueError('Falta nombre de usuario.')
         #Fin de la verificacion
+        if not phone_number:
+            raise ValueError('Falta numero telefonico')
 
         #Creando el objeto usuario, se usa self para crear el propio objeto de su propia clase modelo
         user = self.model(
@@ -20,6 +22,7 @@ class MyAccountManager(BaseUserManager):
             username = username,
             first_name = first_name,
             last_name = last_name,
+            phone_number = phone_number,
         )
 
         user.set_password(password) #Para el password se debe usar la funcion setPassword

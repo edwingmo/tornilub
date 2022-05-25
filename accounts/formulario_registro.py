@@ -12,6 +12,7 @@ class formularioRegistro(forms.Form):
 
     name = forms.CharField(max_length=15,  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'nombre', 'id':'name'}))
     apellido = forms.CharField(max_length=15,  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'apellido', 'id':'apellido'}))
+    phone_number = forms.CharField(max_length=11,  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'4243041212', 'id':'phone_number'}))
     username = forms.CharField(max_length=20,  widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder':'user123', 'id':'username'}))
     email = forms.EmailField(max_length=40,  widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'ej@gmail.com' ,'id':'email'}))
     password = forms.CharField(max_length=20,  widget=forms.PasswordInput(attrs={'class': 'form-control', 'id':'password'}))
@@ -27,6 +28,7 @@ class formularioRegistro(forms.Form):
         username = cleaned_data.get('username')
         name = cleaned_data.get('name')
         apellido = cleaned_data.get('apellido')
+        phone_number = cleaned_data.get('phone_number')
         #captcha = cleaned_data.get('captcha')
 
         if not name.isalpha():
@@ -44,8 +46,12 @@ class formularioRegistro(forms.Form):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError('Email ya existe.')
 
+        username.lower()
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('El nombre de usuario ya existe.')
+
+        if User.objects.filter(phone_number=phone_number).exists():
+            raise forms.ValidationError('El numero de telefono ya existe.')
 
         """if captcha == None:
             raise forms.ValidationError('Por favor completa el recapcha')"""
