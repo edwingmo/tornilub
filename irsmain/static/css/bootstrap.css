@@ -10205,4 +10205,16 @@ h3 {
   color: #545454;
 }
 
+.ir-arriba {
+	display:none;
+	padding:20px;
+	background:#3167eb;
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: fixed;
+	bottom:20px;
+	right:20px;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */
