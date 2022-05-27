@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = ["compresoresv.eba-hfxpxnuu.us-west-2.elasticbeanstalk.com","*"]
+ALLOWED_HOSTS = ["107.152.39.208","*"]
 
 
 # Application definition
@@ -94,7 +94,7 @@ AUTH_USER_MODEL = 'accounts.User' #applicacion account, clase User
 
 import os
 
-if 'RDS_DB_NAME' in os.environ:
+"""if 'RDS_DB_NAME' in os.environ:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -105,8 +105,8 @@ if 'RDS_DB_NAME' in os.environ:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-else:
-    DATABASES = {
+else:"""
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
@@ -158,7 +158,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
 STATICFILES_DIRS = [
             'irsmain/static'
         ]"""
-probando = True
+"""probando = False
 
 if probando == True:
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
@@ -178,14 +178,15 @@ if probando == True:
 
     STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = BASE_DIR /'static'
-    STATICFILES_DIRS = [
+else:"""
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR /'static'
+STATICFILES_DIRS = [
         'irsmain/static',
     ] 
 
-DEFAULT_FILE_STORAGE = 'irsmain.media_storage.MediaStorage'
+#DEFAULT_FILE_STORAGE = 'irsmain.media_storage.MediaStorage'
 MEDIA_URL = '/images/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, "..", "www", "images")
 MEDIA_ROOT = BASE_DIR /'images'
