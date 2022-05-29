@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'carrito',
     'cotizacion',
     'captcha',
-    'storages',
 ]
 
 MIDDLEWARE = [

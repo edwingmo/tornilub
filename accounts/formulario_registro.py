@@ -1,7 +1,7 @@
 from django import forms
 from .models import User
-#from captcha.fields import ReCaptchaField
-#from captcha.widgets import ReCaptchaV2Checkbox
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
 
 import accounts
 
@@ -17,7 +17,7 @@ class formularioRegistro(forms.Form):
     email = forms.EmailField(max_length=40,  widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'ej@gmail.com' ,'id':'email'}))
     password = forms.CharField(max_length=20,  widget=forms.PasswordInput(attrs={'class': 'form-control', 'id':'password'}))
     confirm_password = forms.CharField(max_length=20,  widget=forms.PasswordInput(attrs={'class': 'form-control', 'id':'confirm_password'}))
-    #captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
 
     def clean(self):
@@ -29,7 +29,7 @@ class formularioRegistro(forms.Form):
         name = cleaned_data.get('name')
         apellido = cleaned_data.get('apellido')
         phone_number = cleaned_data.get('phone_number')
-        #captcha = cleaned_data.get('captcha')
+        captcha = cleaned_data.get('captcha')
 
         if not name.isalpha():
             raise forms.ValidationError('El nombre contiene numeros o caracteres especiales')
@@ -53,8 +53,8 @@ class formularioRegistro(forms.Form):
         if User.objects.filter(phone_number=phone_number).exists():
             raise forms.ValidationError('El numero de telefono ya existe.')
 
-        """if captcha == None:
-            raise forms.ValidationError('Por favor completa el recapcha')"""
+        if captcha == None:
+            raise forms.ValidationError('Por favor completa el recapcha')
 
 
         

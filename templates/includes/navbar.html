@@ -20,7 +20,7 @@
             {% comment "" %}<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Llamanos</a></li>{% endcomment %}
             {%if user.id is not None %}
                 {% if user.is_admin %}
-                    <li><a href="http://compresoresv.eba-hfxpxnuu.us-west-2.elasticbeanstalk.com/{{urladmin}}" class="nav-link" target="_blank"><i class="fa fa-user-secret"></i> Admin </a></li>
+                    <li><a href="{% url 'home' %}{{urladmin}}" class="nav-link" target="_blank"><i class="fa fa-user-secret"></i> Admin </a></li>
                 {%endif%}
             {%endif%}
         </ul> <!-- list-inline //  -->
