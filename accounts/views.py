@@ -46,7 +46,7 @@ def register(request):
             })
 
             to_email = email # para quien sera el correo
-            send_email = EmailMessage(mail_subject, body, to=[email])#objeto para mandar el correo junto con los parametros necesarios
+            send_email = EmailMessage(mail_subject, body, to=[to_email])#objeto para mandar el correo junto con los parametros necesarios
             send_email.send()#Enviando el correo
 
             #mensaje de usuario registrado exitosamente
