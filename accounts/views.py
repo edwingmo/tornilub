@@ -31,7 +31,7 @@ def register(request):
             """encsha256 = hashlib.sha256()
             encsha256.update(password.encode('utf8'))"""
 
-            user = User.objects.create_user(username=username, first_name=name, last_name=apellido, email=email, password=password, phone_number=phone_number, is_active=True)
+            user = User.objects.create_user(username=username, first_name=name, last_name=apellido, email=email, password=password, phone_number=phone_number)
             user.save()
 
             #Metodo para enviar el correo
@@ -56,7 +56,8 @@ def register(request):
 
             #wsw(phone_number)
 
-            return redirect('/account/login/?command=verification&email='+email)       
+            #return redirect('/account/login/?command=verification&email='+email)       
+            return redirect('login')       
 
     context = {
         'form':form,
