@@ -146,24 +146,26 @@ def forgotpassword(request):
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email__exact=email)
 
-            if user == email:
+            current_site = get_current_site(request)
+            mail_subtect = 'Restrablacer contraseña'
+            body = render_to_string('cambiarpassword.html', {
+                'user':user,
+                'domain':current_site,
+                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                'token':default_token_generator.make_token(user),
+            })
 
-                current_site = get_current_site(request)
-                mail_subtect = 'Restrablacer contrase;a'
-                body = render_to_string('cambiarpassword.html', {
-                    'user':user,
-                    'domain':current_site,
-                    'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token':default_token_generator.make_token(user),
-                })
+            to_email = email
+            send_email = EmailMessage(mail_subtect, body, to=[to_email])
+            send_email.send()
 
-                to_email = email
-                send_email = EmailMessage(mail_subtect, body, to=[to_email])
-                send_email.send()
+            messages.success(request, 'El correo para restablecer contraseña fue enviado')
 
-                messages.success(request, 'El correo para restablecer contrase;a fue enviado')
+            if request.user.is_authenticated:
+                auth.logout(request)
                 return redirect('login')
-            
+            else:
+                return redirect('login')
         else:
             messages.error('El email no existe')
             return redirect('forgotpassword')
