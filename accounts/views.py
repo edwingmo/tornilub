@@ -47,7 +47,7 @@ def register(request):
 
             to_email = email # para quien sera el correo
             send_email = EmailMessage(mail_subject, body, to=[to_email])#objeto para mandar el correo junto con los parametros necesarios
-            #send_email.send()#Enviando el correo
+            send_email.send()#Enviando el correo
 
             #mensaje de usuario registrado exitosamente
             messages.success(request, 'Se registro el Usuario exitosamente')
@@ -56,8 +56,7 @@ def register(request):
 
             #wsw(phone_number)
 
-            #return redirect('/account/login/?command=verification&email='+email)       
-            return redirect('login')       
+            return redirect('/account/login/?command=verification&email='+email)       
 
     context = {
         'form':form,
@@ -147,21 +146,24 @@ def forgotpassword(request):
         if User.objects.filter(email=email).exists():
             user = User.objects.get(email__exact=email)
 
-            current_site = get_current_site(request)
-            mail_subtect = 'Restrablacer contrase;a'
-            body = render_to_string('cambiarpassword.html', {
-                'user':user,
-                'domain':current_site,
-                'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':default_token_generator.make_token(user),
-            })
+            if user == email:
 
-            to_email = email
-            send_email = EmailMessage(mail_subtect, body, to=[to_email])
-            send_email.send()
+                current_site = get_current_site(request)
+                mail_subtect = 'Restrablacer contrase;a'
+                body = render_to_string('cambiarpassword.html', {
+                    'user':user,
+                    'domain':current_site,
+                    'uid':urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token':default_token_generator.make_token(user),
+                })
 
-            messages.success(request, 'El correo para restablecer contrase;a fue enviado')
-            return redirect('login')
+                to_email = email
+                send_email = EmailMessage(mail_subtect, body, to=[to_email])
+                send_email.send()
+
+                messages.success(request, 'El correo para restablecer contrase;a fue enviado')
+                return redirect('login')
+            
         else:
             messages.error('El email no existe')
             return redirect('forgotpassword')

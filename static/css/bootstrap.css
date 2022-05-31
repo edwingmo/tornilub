@@ -10217,4 +10217,7 @@ h3 {
 	right:20px;
 }
 
+.logo-carousel{
+  transition: 1s;
+}
 /*# sourceMappingURL=bootstrap.css.map */
