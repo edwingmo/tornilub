@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-from ctypes import cast
 from pathlib import Path
 from decouple import config
 
@@ -82,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'irsmain.wsgi.application'
+#WSGI_APPLICATION = 'irsmain.wsgi.application'
 
 #Aca defines que empiece a tomar el valor de accounts de la app accounts para crear nuevos usuarios, en vez de el por defecto
 AUTH_USER_MODEL = 'accounts.User' #applicacion account, clase User
@@ -183,7 +182,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
         'irsmain/static',
-    ] 
+    ]
 
 #DEFAULT_FILE_STORAGE = 'irsmain.media_storage.MediaStorage'
 MEDIA_URL = '/images/'
