@@ -1359,9 +1359,9 @@ a[class*=card]:hover .title {
   display: block;
 }
 .gallery-wrap .img-big-wrap img {
-  height: 450px;
-  width: auto;
-  display: inline-block;
+  object-fit: cover;
+  width:100%;
+  height:100%;
 }
 .gallery-wrap .thumbs-wrap {
   text-align: center;

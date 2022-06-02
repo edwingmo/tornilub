@@ -131,9 +131,13 @@
                 <figcaption class="info-wrap">
                     <div class="fix-height">                      
                         <a href="{{ producto.redireccionar }}" class="title">{{producto.nombre_producto}}</a>
-                        <!--<div class="price-wrap mt-2">
-                            <span class="price">{{producto.precio}}</span>
-                        </div>  price-wrap.// -->
+
+                        {% if user.is_admin %}
+                        <div class="price-wrap mt-2">
+                            <span class="price text-muted">Ultimo precio {{producto.precio}}$---Stock {{producto.stock}}</span>
+                        </div>  <!--price-wrap.//-->
+                        {%endif%}
+
                     </div>                            
                     <a href="{% url 'solicitarcot' producto.id %}" class="btn btn-block btn-success"> Preguntar Disponibilidad</a>                                                                                               
                 </figcaption>                            

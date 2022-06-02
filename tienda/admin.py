@@ -18,9 +18,13 @@ class AdminProductos(admin.ModelAdmin):
     #category = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
 
-    list_display = ('activo', 'category', 'nombre_producto', 'slug', 'descripcion', 'precio', 'cantidad', 'stock', 'create_date', 'last_edit',)
+    list_display = ('activo', 'category', 'nombre_producto', 'numero_parte', 'slug', 'descripcion', 'precio', 'cantidad', 'stock', 'create_date', 'last_edit',)
     prepopulated_fields = {'slug':('nombre_producto',)}
     list_display_links = ('nombre_producto',)
+     # con esto añades un campo de texto que te permite realizar la busqueda, puedes añadir mas de un atributo por el cual se filtrará
+    search_fields = ['nombre_producto', 'numero_parte']
+    # con esto añadiras una lista desplegable con la que podras filtrar (activo es un atributo booleano)
+    list_filter = ['activo']
 
 admin.site.register(Productos, AdminProductos)
 admin.site.register(Favoritos)
